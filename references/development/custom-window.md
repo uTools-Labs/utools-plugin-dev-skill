@@ -145,7 +145,7 @@ function createFullScreenTransparentWindow() {
     y: displayBounds.y,
     width: displayBounds.width,
     height: displayBounds.height,
-    // 如果要接收鼠标事件可设置为 'rgba(255,255,255,0.01)',
+    // 如果需要接收鼠标事件，可设置为接近完全透明但实际具有背景的颜色
     backgroundColor: "#00000000",
     frame: false,
     transparent: true,
@@ -167,7 +167,7 @@ function createFullScreenTransparentWindow() {
   });
   // 设置窗口置顶层级
   try {
-    regionWindow.setAlwaysOnTop(true, 'screen-saver');
+    regionWindow.setAlwaysOnTop(true, "screen-saver");
   } catch {}
 }
 ```
@@ -175,8 +175,14 @@ function createFullScreenTransparentWindow() {
 如果透明窗口需要接收鼠标事件，可以将 `backgroundColor` 设置为接近完全透明但实际具有背景的颜色，例如：
 
 ```js
-backgroundColor: 'rgba(255, 255, 255, 0.01)'
+backgroundColor: "rgba(255, 255, 255, 0.01)"
 ```
+
+::: warning 性能注意
+对于包含复杂动画、视觉特效或 3D 渲染的透明窗口，建议保持 `focusable: true` 并让窗口获得焦点。
+
+设置 `focusable: false` 后，窗口可能被 Chromium 视为非活动窗口，从而降低渲染优先级或帧率，导致动画出现卡顿。`backgroundThrottling: false` 并不能完全避免这种情况，因此对高性能动画场景，建议让窗口保持可聚焦并主动获得焦点。
+:::
 
 ### 透明置顶小窗口
 

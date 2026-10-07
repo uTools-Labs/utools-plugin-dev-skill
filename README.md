@@ -1,4 +1,4 @@
-# uTools 插件应用开发技能
+# uTools 插件应用开发 Skill
 
 `utools-plugin-dev` 是 uTools 官方提供的 Agent Skill，用于辅助开发 uTools 插件应用。
 
