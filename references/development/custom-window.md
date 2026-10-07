@@ -179,9 +179,11 @@ backgroundColor: "rgba(255, 255, 255, 0.01)"
 ```
 
 ::: warning 性能注意
+
 对于包含复杂动画、视觉特效或 3D 渲染的透明窗口，建议保持 `focusable: true` 并让窗口获得焦点。
 
 设置 `focusable: false` 后，窗口可能被 Chromium 视为非活动窗口，从而降低渲染优先级或帧率，导致动画出现卡顿。`backgroundThrottling: false` 并不能完全避免这种情况，因此对高性能动画场景，建议让窗口保持可聚焦并主动获得焦点。
+
 :::
 
 ### 透明置顶小窗口
