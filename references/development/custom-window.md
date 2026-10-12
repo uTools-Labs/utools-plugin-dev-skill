@@ -137,8 +137,8 @@ function createFullScreenTransparentWindow() {
   const cursorPoint = utools.getCursorScreenPoint();
   const currentDisplay = utools.getDisplayNearestPoint(cursorPoint);
   const displayBounds = currentDisplay.bounds;
-  // Windows 下使用 fullscreen 避免窗口尺寸限制
-  const fullscreenable = utools.isWindows();
+  // Windows 下需要覆盖系统任务栏区域时开启全屏；普通屏幕特效无需开启，否则任务栏会被窗口覆盖
+  const isFullscreen = utools.isWindows();
   const regionWindow = utools.createBrowserWindow("foo.html?params=xxx", {
     show: true,
     x: displayBounds.x,
@@ -153,8 +153,8 @@ function createFullScreenTransparentWindow() {
     movable: false,
     minimizable: false,
     maximizable: false,
-    fullscreenable,
-    fullscreen: fullscreenable,
+    fullscreenable: isFullscreen,
+    fullscreen: isFullscreen,
     autoHideMenuBar: true,
     skipTaskbar: true,
     enableLargerThanScreen: true,
