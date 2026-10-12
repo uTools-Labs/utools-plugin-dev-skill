@@ -147,7 +147,9 @@ function ai(options: AiOptions): AiPromise<Message>;
 ```ts
 interface AiOptions {
   /**
-   * AI 模型 ID, 为空使用默认
+   * AI 模型 ID
+   *
+   * 未配置时使用默认模型（一般无需配置）
    */
   model?: string;
   /**
@@ -155,9 +157,18 @@ interface AiOptions {
    */
   messages: Message[];
   /**
-   * 工具列表
+   * 可供 AI 调用的工具列表
    */
   tools?: Tool[];
+  /**
+   * 思考强度（一般无需配置）
+   *
+   * "none" 表示关闭思考模式；
+   * 其他值表示不同程度的思考强度。
+   * 
+   * 此参数及其支持的取值因 AI 模型而异。
+   */
+  reasoning_effort?: "none" | "minimal" | "low" | "medium" | "high" | "xhigh" | "max";
 }
 ```
 
@@ -180,7 +191,9 @@ interface Message {
    */
   content?: string;
   /**
-   * AI 推理内容（部分模型支持）
+   * AI 推理内容
+   *
+   * 部分支持推理能力的模型会返回该字段。
    */
   reasoning_content?: string;
 }
