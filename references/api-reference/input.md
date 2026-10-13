@@ -126,9 +126,9 @@ utools.hideMainWindowTypeString("Test ▶ 可以是任意字符，包含 Emoji -
 
 ## `utools.startDrag(filePath)`
 
-从插件应用中发起文件拖拽，将文件或文件夹拖拽到其他应用窗口。
+从插件应用中发起文件拖拽，将指定文件或文件夹拖拽到其他应用窗口。
 
-通常与界面 UI 的 `onDragStart` 事件配合使用。
+通常在界面元素的 `dragstart` 事件中调用，用于实现文件拖拽功能。
 
 ### 类型定义
 
@@ -142,12 +142,15 @@ function startDrag(filePath: string | string[]): void;
 
 ### 示例
 
-```js
+```jsx
 <div
-  draggable='true'
-  onDragStart={() => {
+  draggable
+  onDragStart={(e) => {
+    // 阻止默认网页拖拽行为，调用 uTools 文件拖拽
+    e.preventDefault();
     utools.startDrag("/path/to/abc.txt");
   }}
 >
+  拖拽文件
 </div>
 ```
